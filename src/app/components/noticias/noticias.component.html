@@ -1,0 +1,48 @@
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Noticias Actuales</h2>
+  
+    <!-- Selector de categoría -->
+    <div class="mb-3 text-center">
+      <label for="categoria" class="form-label me-2">Categoría:</label>
+      <select class="form-select d-inline-block w-auto"
+        [(ngModel)]="categoriaSeleccionada"
+        (ngModelChange)="cargarNoticias(categoriaSeleccionada)">
+  <option *ngFor="let c of categorias" [value]="c.valor">
+    {{ c.nombre }}
+  </option>
+</select>
+    </div>
+  
+    <!-- Spinner de carga 
+    <div *ngIf="!news || news.length === 0" class="text-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">Cargando noticias...</p>
+    </div>
+  
+  
+  -->
+    <!-- Grid de noticias -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
+         *ngIf="news && news.length > 0">
+      <div class="col" *ngFor="let item of news">
+        <div class="card h-100 shadow-sm">
+          <div class="card-img-top text-center bg-light card-image-container">
+            <img *ngIf="item.photo_url"
+                 [src]="item.photo_url"
+                 [alt]="item.title"
+                 class="img-fluid card-image">
+            <div *ngIf="!item.photo_url" class="d-flex align-items-center justify-content-center h-100">
+              <i class="bi bi-image text-secondary image-placeholder"></i>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-text">{{ item.snippet }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
