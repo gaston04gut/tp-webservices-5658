@@ -1,7 +1,6 @@
 export class HomeModel {
-    'titulo': string;
-    'descripcion': string;
-    'ruta': string;
-    'imagen': string;
-  }
-  
+  'titulo': string;
+  'descripcion': string;
+  'ruta': string;
+  'imagen': string;
+}

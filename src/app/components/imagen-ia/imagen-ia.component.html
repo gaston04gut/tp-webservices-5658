@@ -1,1 +1,67 @@
-<p>imagen-ia works!</p>
+<app-header></app-header>
+<div class="container mt-4">
+  <!-- Header con Logo -->
+  <div class="d-flex align-items-center mb-4">
+    <h1>
+      <i class="bi bi-facebook"></i>
+    </h1>
+    <h2 class="mb-0">Creador de Posts con IA</h2>
+  </div>
+
+  <!-- Contenedor Principal -->
+  <div class="row">
+    <!-- Formulario del Post -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <!-- Input para Título -->
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              [(ngModel)]="title"
+              placeholder="¿Qué título tendrá tu post?"
+            />
+          </div>
+
+          <!-- Input para Contenido -->
+          <div class="mb-3">
+            <textarea
+              class="form-control"
+              [(ngModel)]="content"
+              rows="4"
+              placeholder="¿Qué estás pensando?"
+            ></textarea>
+          </div>
+
+          <!-- Botón de Generar -->
+          <button
+            class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2"
+            (click)="generarImagen()"
+          >
+            <i class="bi bi-image"></i>
+            Generar Imagen Asociada
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview de la Imagen -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <div *ngIf="!imagenBase64" class="text-center text-muted">
+            <i class="bi bi-image" style="font-size: 4rem"></i>
+            <p class="mt-2">La imagen generada aparecerá aquí</p>
+          </div>
+          <img
+            *ngIf="imagenBase64"
+            [src]="imagenBase64"
+            alt="Imagen generada"
+            class="img-fluid rounded"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

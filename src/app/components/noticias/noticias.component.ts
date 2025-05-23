@@ -3,43 +3,48 @@ import { NoticiasService } from '../../services/noticias/noticias.service';
 import { NoticiaModel } from '../../models/noticia-model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../layout/header/header.component';
 
 @Component({
   selector: 'app-noticias',
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, HeaderComponent],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.css',
 })
 export class NoticiasComponent {
-  news!: Array<NoticiaModel>;
+  news: NoticiaModel[] = [];
   new!: NoticiaModel;
   categoriaSeleccionada: string = 'WORLD';
   categorias = [
-    {nombre: 'Mundo', valor: 'WORLD'},
+    { nombre: 'Mundo', valor: 'WORLD' },
     { nombre: 'Negocios', valor: 'BUSINESS' },
     { nombre: 'Tecnología', valor: 'TECHNOLOGY' },
     { nombre: 'Salud', valor: 'HEALTH' },
     { nombre: 'Ciencia', valor: 'SCIENCE' },
+    { nombre: 'Entretenimiento', valor: 'ENTERTAINMENT' },
     { nombre: 'Deportes', valor: 'SPORTS' },
   ];
 
-
   constructor(private noticiasService: NoticiasService) {}
-  
+
   cargarNoticias(categoria: string) {
     this.noticiasService.getNoticias(categoria).subscribe(
       (result) => {
-        this.news = new Array<NoticiaModel>();
-        result.data.forEach((element: any) => {
+        this.news = result.data.map((element: any) => {
+          //el resultado de la api es un array de objetos, success, total y data
+          // //data es un array de objetos, cada objeto es una noticia
+          console.log(element);
           const noticia = new NoticiaModel();
 
           noticia.title = element.title;
-          noticia.snippet = element.snippet;
+          noticia.description = element.description;
 
-          // Acceder a la imagen correctamente:
-          noticia.photo_url = element.photo_url;
+          noticia.thumbnail = element.thumbnail;
+          noticia.link = element.url;
+          noticia.date = element.date;
 
-          this.news.push(noticia);
+          return noticia;
         });
         console.log(this.news);
       },
@@ -52,7 +57,4 @@ export class NoticiasComponent {
   ngOnInit() {
     this.cargarNoticias('WORLD');
   }
-
-
-  
 }

@@ -14,4 +14,5 @@ export class HomeComponent {
   constructor(private homeService: HomeService) {
     this.homes = this.homeService.getHomes();
   }
+
 }

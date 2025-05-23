@@ -1,12 +1,11 @@
 <div class="container h-100 mt-5">
-    <!-- Parte 1 -->
-    <h2 class="text-center mb-4">Parte 1</h2>
     <div class="row justify-content-center align-items-center mb-5">
-      <div class="col-md-4 mb-4" *ngFor="let item of homes | slice:0:3">
+      <div class="col-md-4 mb-4" *ngFor="let item of homes">
         <div class="card h-100 shadow-lg">
           <div class="card-img-wrapper">
-            <img [src]="item.imagen" class="card-img-top" alt="..." />
-          </div>
+            <div class="card-img-wrapper">
+              <img [src]="item.imagen" class="card-img-top" alt="..." />
+            </div>
           <div class="card-body text-center">
             <h5 class="card-title">{{ item.titulo }}</h5>
             <p class="card-text">{{ item.descripcion }}</p>

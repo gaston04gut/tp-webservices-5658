@@ -1,11 +1,15 @@
 export class NoticiaModel {
   title: string;
-  snippet: string;
-  photo_url: string;
+  description: string;
+  thumbnail: string;
+  link: string;
+  date: string;
 
   constructor() {
     this.title = '';
-    this.snippet = '';
-    this.photo_url = '';
+    this.description = '';
+    this.thumbnail = '';
+    this.link = '';
+    this.date= '';
   }
 }

@@ -1,1 +1,73 @@
-<p>marca-auto works!</p>
+<app-header></app-header>
+<div class="container mt-4">
+  <h2 class="mb-3">Seleccione una Marca de Auto</h2>
+
+  <!-- Selector de Marcas -->
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <label for="selectMarca" class="form-label">Marca:</label>
+      <select
+        id="selectMarca"
+        class="form-select"
+        [(ngModel)]="marcaID"
+        (ngModelChange)="cargarModelos(marcaID)"
+        aria-label="Selector de marcas de auto"
+      >
+        <option [ngValue]="undefined" disabled selected>
+          -- Seleccione una marca --
+        </option>
+        <option *ngFor="let marca of marcasAutos" [value]="marca.id">
+          {{ marca.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Modal para mostrar Modelos -->
+  <div
+    class="modal fade"
+    id="modelosModal"
+    tabindex="-1"
+    aria-labelledby="modelosModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modelosModalLabel">Modelos de</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="modelosAutos && modelosAutos.length > 0; else noModelos">
+            <ul class="list-group">
+              <li *ngFor="let modelo of modelosAutos" class="list-group-item">
+                {{ modelo.nameModelo }}
+              </li>
+            </ul>
+          </div>
+          <ng-template #noModelos>
+            <p>
+              No se encontraron modelos para la marca seleccionada o la
+              información no está disponible.
+            </p>
+          </ng-template>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</div>

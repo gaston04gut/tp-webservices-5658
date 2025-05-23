@@ -1,1 +1,80 @@
-<p>conversor works!</p>
+<app-header></app-header>
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Conversor de Monedas</h2>
+
+  <div class="row g-3 align-items-end">
+    <!-- Moneda de Origen -->
+    <div class="col-md-3">
+      <label for="fromCurrency" class="form-label">De:</label>
+      <select
+        class="form-select"
+        id="fromCurrency"
+        [(ngModel)]="monedaOrigen"
+        name="fromCurrency"
+      >
+        <option [ngValue]="undefined" disabled selected>
+          Seleccione moneda
+        </option>
+        <option
+          *ngFor="let currency of curriencies"
+          [value]="currency.currency"
+        >
+          {{ currency.currency }} - {{ currency.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Moneda de Destino -->
+    <div class="col-md-3">
+      <label for="toCurrency" class="form-label">A:</label>
+      <select
+        class="form-select"
+        id="toCurrency"
+        [(ngModel)]="monedaDestino"
+        name="toCurrency"
+      >
+        <option [ngValue]="undefined" disabled selected>
+          Seleccione moneda
+        </option>
+        <option
+          *ngFor="let currency of curriencies"
+          [value]="currency.currency"
+        >
+          {{ currency.currency }} - {{ currency.name }}
+        </option>
+      </select>
+    </div>
+    <!-- Cantidad a Convertir -->
+    <div class="col-md-3">
+      <label for="amount" class="form-label">Cantidad:</label>
+      <input
+        type="number"
+        class="form-control"
+        id="amount"
+        [(ngModel)]="montoInput"
+        name="amount"
+        placeholder="0.00"
+      />
+    </div>
+
+    <!-- Botón de Convertir -->
+    <div class="col-md-3">
+      <button
+        class="btn btn-primary w-100"
+        (click)="convertirMoneda(monedaOrigen, monedaDestino, montoInput)"
+        [disabled]="!montoInput || !monedaOrigen || !monedaDestino"
+      >
+        Convertir
+      </button>
+    </div>
+  </div>
+
+  <!-- Resultado de la Conversión -->
+  <div *ngIf="conversionResultado !== 0" class="mt-4 p-3 bg-light rounded">
+    <h4 class="text-center">Resultado:</h4>
+    <p class="text-center fs-3">
+      {{ montoInput }} {{ monedaOrigen }} =
+      {{ conversionResultado | number : "1.2-2" }} {{ monedaDestino }}
+    </p>
+  </div>
+</div>
