@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HomeModel } from '../../../models/home-model';
-import { HomeService } from '../../../services/home.service';
+import { HomeModel } from '../../../models/home/home-model';
+import { HomeService } from '../../../services/home/home.service';
 @Component({
   selector: 'app-home',
   imports: [RouterLink, CommonModule],

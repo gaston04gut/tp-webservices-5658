@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { getCache, removeCache, setCache } from '../../utils/cache-utils';
-import { ConversorModel } from '../../models/conversor/conversor-model';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -23,43 +23,34 @@ export class ConversorService {
     }
     const httpOptions = {
       headers: new HttpHeaders({
-        'apiKey': 'U3HBR6sdeshZnAgOJUORUOV7fjiAbYch'
+        apiKey: 'U3HBR6sdeshZnAgOJUORUOV7fjiAbYch',
       }),
     };
     const url = `https://api.apilayer.com/currency_data/list`;
-    return this._http
-      .get<{ currencies: Record<string, string> }>(url, httpOptions)
-      .pipe(
-        map((response) => {
-          const models: ConversorModel[] = [];
-          for (const [code, name] of Object.entries(response.currencies)) {
-            const model = new ConversorModel();
-            model.name = name;
-            model.currency = code;
-            models.push(model);
-          }
-          return models;
-        }),
-        tap((models) => {
-          setCache(cacheKey, models);
-          console.log('Obteniendo datos de la API');
-        })
-      );
+    return this._http.get<any>(url, httpOptions).pipe(
+      tap((response) => {
+        setCache(cacheKey, response);
+        console.log('Obteniendo datos de la API');
+      })
+    );
   }
 
   public convertirMoneda(
     from: string,
     to: string,
     amount: string
-  ): Observable<any> {
+  ): Observable<number> {
     const httpOptions = {
       headers: new HttpHeaders({
         apiKey: 'U3HBR6sdeshZnAgOJUORUOV7fjiAbYch',
       }),
     };
     const url = `https://api.apilayer.com/currency_data/convert?to=${to}&from=${from}&amount=${amount}`;
-    return this._http
-      .get<any>(url, httpOptions)
-      .pipe(map((response) => response.result));
+    return this._http.get<any>(url, httpOptions).pipe(
+      map((response) => {
+        // Verificar si la respuesta tiene la propiedad result
+        return response.result;
+      })
+    );
   }
 }

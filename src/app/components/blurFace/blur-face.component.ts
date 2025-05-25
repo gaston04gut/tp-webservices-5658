@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BlurFaceService } from '../../services/blurFace/blur-face.service';
 import { HeaderComponent } from "../layout/header/header.component";
+import { FooterComponent } from '../layout/footer/footer.component';
 
 @Component({
   selector: 'app-blur-face',

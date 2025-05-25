@@ -23,9 +23,21 @@ export class ConversorComponent {
 
   cargarMonedas() {
     this.conversorService.getPaises().subscribe(
-      (result) => {
-        this.curriencies = result;
-        console.log(this.curriencies);
+      (response) => {
+        if (response && response.currencies) {
+          const models: ConversorModel[] = [];
+          // Procesar la respuesta de la API en el componente
+          for (const [code, name] of Object.entries(response.currencies)) {
+            const model = new ConversorModel();
+            model.name = name as string;
+            model.currency = code;
+            models.push(model);
+          }
+          this.curriencies = models;
+          console.log('Monedas procesadas:', this.curriencies);
+        } else if (response && typeof response === 'object') {
+          console.log('Propiedades de la respuesta:', Object.keys(response));
+        }
       },
       (error) => {
         alert('Error al cargar las monedas');
@@ -40,8 +52,9 @@ export class ConversorComponent {
         this.conversionResultado = result;
       },
       (error) => {
-        console.error("error", error);
-        alert("OCAS")
+        console.error('error', error);
+        alert('Error al Convertir la moneda');
+        this.conversionResultado = 0;
       }
     );
   }

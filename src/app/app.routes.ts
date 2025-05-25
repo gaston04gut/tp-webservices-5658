@@ -6,10 +6,10 @@ import { ConversorComponent } from './components/conversor/conversor.component';
 import { ImagenIAComponent } from './components/imagen-ia/imagen-ia.component';
 import { BlurFaceComponent } from './components/blurFace/blur-face.component';
 import { GeneradorQRComponent } from './components/generador-qr/generador-qr.component';
+import { LibroComponent } from './components/libro/libro.component';
 
 export const routes: Routes = [
-  {    path: '',
-    component: HomeComponent, },
+  { path: '', component: HomeComponent },
   {
     path: 'noticias',
     component: NoticiasComponent,
@@ -35,7 +35,11 @@ export const routes: Routes = [
     component: GeneradorQRComponent, // Asegúrate de que el nombre del componente sea correcto
   },
   {
+    path: 'libro',
+    component: LibroComponent,
+  },
+  {
     path: '**',
     redirectTo: '',
-  }
+  },
 ];

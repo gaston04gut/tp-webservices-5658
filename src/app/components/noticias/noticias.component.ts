@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NoticiasService } from '../../services/noticias/noticias.service';
-import { NoticiaModel } from '../../models/noticia-model';
+import { NoticiaModel } from '../../models/noticia/noticia-model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../layout/header/header.component';

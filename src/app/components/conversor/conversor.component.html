@@ -73,8 +73,8 @@
   <div *ngIf="conversionResultado !== 0" class="mt-4 p-3 bg-light rounded">
     <h4 class="text-center">Resultado:</h4>
     <p class="text-center fs-3">
-      {{ montoInput }} {{ monedaOrigen }} =
-      {{ conversionResultado | number : "1.2-2" }} {{ monedaDestino }}
+      {{ montoInput | number }} {{ monedaOrigen }} =
+      {{ conversionResultado | number : '1.2-2' }} {{ monedaDestino }}
     </p>
   </div>
 </div>

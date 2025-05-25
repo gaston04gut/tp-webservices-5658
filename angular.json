@@ -4,6 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "tp-webservice-5658": {
+      "i18n": {
+        "sourceLocale": "es-419"
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",

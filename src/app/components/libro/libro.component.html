@@ -1,0 +1,92 @@
+<select name="" id="" [(ngModel)]="mes">
+  <option value="1">enero</option>
+  <option value="2">febrero</option>
+  <option value="3">marzo</option>
+  <option value="4">abril</option>
+  <option value="5">mayo</option>
+  <option value="6">junio</option>
+  <option value="7">julio</option>
+  <option value="8">agosto</option>
+  <option value="9">septiembre</option>
+  <option value="10">octubre</option>
+  <option value="11">noviembre</option>
+  <option value="12">diciembre</option>
+</select>
+
+<input type="text" [(ngModel)]="anio" placeholder="Año" />
+
+<button (click)="getLibros(anio, mes)">Buscar Libros</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Posición</th>
+      <th>Nombre</th>
+      <th>Imagen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let libro of libros">
+      <td>{{ libro.position }}</td>
+      <td>
+        <a
+          href="#"
+          (click)="getInfoLibro(libro.book_id, $event)"
+          class="text-primary text-decoration-none"
+        >
+          {{ libro.name }}
+        </a>
+      </td>
+      <td>
+        <img
+          [src]="libro.cover"
+          alt="{{ libro.name }}"
+          width="80"
+          height="80"
+          class="img-thumbnail"
+        />
+      </td>
+      <td>
+        <p><strong>Autor:</strong> {{ libro.author }}</p>
+        <p><strong>Sinopsis:</strong> {{ libro.sinopsis }}</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="detalleLibroModal"
+  tabindex="-1"
+  aria-hidden="true"
+  #miModalFacheroEnHTML
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ libroDetalle?.name }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <p><strong>Autor(es):</strong> {{ libroDetalle?.author }}</p>
+            <p><strong>Resumen:</strong></p>
+            <p class="text-justify">{{ libroDetalle?.sinopsis }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
