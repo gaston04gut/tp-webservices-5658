@@ -11,10 +11,12 @@ declare var bootstrap: any; // Permite a TypeScript reconocer la variable global
   templateUrl: './libro.component.html',
   styleUrl: './libro.component.css',
 })
+
 export class LibroComponent {
   anio!: number;
   mes!: number;
   libros: LibroModels[] = [];
+
   libroDetalle?: LibroModels;
 
   @ViewChild('miModalFacheroEnHTML') acaSeLlamaModalEnComponent!: ElementRef; //
@@ -35,7 +37,9 @@ export class LibroComponent {
           libro.book_id = element.book_id;
           return libro;
         });
+
         //Ya obtengo los libros, ahora llamar al servicio para obtener la info de cada libro.
+        //esto es del adicional del simulacro
         //la info viene desde otra API, por lo que tengo que llamar a otro servicio.
         this.libros.forEach((libro) => {
           // Iterar sobre cada libro, libros ya defenidos anteriormente

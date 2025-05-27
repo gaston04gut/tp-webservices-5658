@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <input type="text" [(ngModel)]="query" />
+  <button (click)="getVideos(query)">Buscar Video</button>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID video</th>
+          <th>Titulo</th>
+          <th>Enlace</th>
+          <th>Canal Youtube</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let video of videos">
+          <td><a href="#" (click)="mostrarInfo($event, video)">{{video.id}}</a></td>
+          <td>{{ video.title }}</td>
+          <td>{{ video.short_url }}</td>
+          <td>
+            <p>Nombre {{ video.channelName }}</p>
+            <p><img [src]="video.channelIcon" alt="" />Icono</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="detalleVideoModal" tabindex="-1" aria-hidden="true" #miModalFacheroEnHTML>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ videoDetalle?.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <p><strong>ID:</strong> {{ videoDetalle?.id }}</p>
+            <p><strong>Canal:</strong> {{ videoDetalle?.channelName }}</p>
+            <p><strong>Descripción:</strong> {{ videoDetalle?.descriptionSnippet }}</p>
+            <p><strong>Vistas:</strong> {{ videoDetalle?.views }}</p>
+            <img [src]="videoDetalle?.channelIcon" alt="Icono canal" style="max-width: 100px;" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

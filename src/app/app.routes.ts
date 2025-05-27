@@ -7,6 +7,7 @@ import { ImagenIAComponent } from './components/imagen-ia/imagen-ia.component';
 import { BlurFaceComponent } from './components/blurFace/blur-face.component';
 import { GeneradorQRComponent } from './components/generador-qr/generador-qr.component';
 import { LibroComponent } from './components/libro/libro.component';
+import { YoutubeComponent } from './components/practica/youtube/youtube.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,6 +39,11 @@ export const routes: Routes = [
     path: 'libro',
     component: LibroComponent,
   },
+  {
+    path: 'youtube',
+    component: YoutubeComponent,
+  },
+
   {
     path: '**',
     redirectTo: '',
